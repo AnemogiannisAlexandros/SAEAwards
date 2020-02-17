@@ -35,10 +35,11 @@ public class TNT : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
+
             if (photonView.IsMine)
             {
                 collision.gameObject.GetComponent<PhotonView>().RPC("ApplyDamage", RpcTarget.All);
-                DestroyItemGlobally();
+                DestroyItemLocally();
             }
         }
     }
@@ -52,6 +53,6 @@ public class TNT : MonoBehaviour
     private void DestroyItemLocally()
     {
         isDestroyed = true;
-        GetComponent<Renderer>().enabled = false;
+        Destroy(gameObject);
     }
 }

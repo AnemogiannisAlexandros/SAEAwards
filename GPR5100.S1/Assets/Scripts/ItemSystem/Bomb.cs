@@ -9,20 +9,13 @@ public class Bomb : MonoBehaviour
 
     private bool isDestroyed;
     private PhotonView photonView;
-    private new Rigidbody rigidbody;
 
     public void Awake()
     {
         photonView = GetComponent<PhotonView>();
-        rigidbody = GetComponent<Rigidbody>();
-        
     }
     public void Update()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
     }
     public void OnCollisionEnter(Collision collision)
     {
@@ -32,14 +25,14 @@ public class Bomb : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
-            DestroyItemGlobaly();
+            DestroyItemLocaly();
         }
         else if (collision.gameObject.CompareTag("Player")) 
         {
             if (photonView.IsMine) 
             {
                 collision.gameObject.GetComponent<PhotonView>().RPC("ApplyDamage", RpcTarget.All);
-                DestroyItemGlobaly();
+                DestroyItemLocaly();
             }
         }
     }
@@ -52,6 +45,6 @@ public class Bomb : MonoBehaviour
     private void DestroyItemLocaly() 
     {
         isDestroyed = true;
-        GetComponent<Renderer>().enabled = false;
+        Destroy(gameObject);
     }
 }

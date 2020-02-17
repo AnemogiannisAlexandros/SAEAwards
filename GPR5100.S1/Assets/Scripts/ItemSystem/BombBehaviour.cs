@@ -23,7 +23,7 @@ public class BombBehaviour : MonoBehaviour, IItemBehaviour
     {
         offset = 4;
     }
-    public void InitializeItem(Player player, float offset ,Vector3 originalDirection, float lag)
+    public void InitializeItem(Player player, float offset ,Vector3 originalDirection, float lag, PhotonMessageInfo info)
     {
         Owner = player;
 
@@ -39,8 +39,7 @@ public class BombBehaviour : MonoBehaviour, IItemBehaviour
     {
         if (collision.gameObject.CompareTag("Player")||collision.gameObject.CompareTag("Wall"))
         {
-            PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position,Quaternion.identity);
-            Destroy(gameObject);
+            PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position, Quaternion.identity);
         }
     }
 }

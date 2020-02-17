@@ -25,7 +25,7 @@ public class TNTBehaviour : MonoBehaviour,IItemBehaviour
     }
    
 
-    public void InitializeItem(Player player, float offset, Vector3 originalDirection, float lag)
+    public void InitializeItem(Player player, float offset, Vector3 originalDirection, float lag, PhotonMessageInfo info)
     {
         Owner = player;
 
@@ -40,7 +40,6 @@ public class TNTBehaviour : MonoBehaviour,IItemBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position, Quaternion.identity);
-
             Destroy(gameObject);
         }
     }

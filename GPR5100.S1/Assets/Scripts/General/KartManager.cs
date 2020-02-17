@@ -11,7 +11,7 @@ using TMPro;
 
 namespace MyMultiplayerProject
 {
-   /// <summary>
+    /// <summary>
     /// To Do Implementation of Kart
     /// </summary>
     public class KartManager : MonoBehaviour
@@ -24,10 +24,9 @@ namespace MyMultiplayerProject
         private new Collider collider;
         private new List<Renderer> childRenderers = new List<Renderer>();
         private Animator anim;
-        //Will Hold The Item ID As A simple Int!!!
         private bool controllable = true;
 
-        public bool IsControllable() 
+        public bool IsControllable()
         {
             return controllable;
         }
@@ -55,7 +54,7 @@ namespace MyMultiplayerProject
                 childRenderers.Add(r);
                 r.material.color = GameManager.GetColor(photonView.Owner.GetPlayerNumber());
             }
-            if (photonView.IsMine) 
+            if (photonView.IsMine)
             {
                 GameObject trailsLeft = PhotonNetwork.Instantiate("DriftTrail", transform.position, Quaternion.identity);
                 GameObject trailsRight = PhotonNetwork.Instantiate("DriftTrail", transform.position, Quaternion.identity);
@@ -67,7 +66,7 @@ namespace MyMultiplayerProject
                 trailsLeft.transform.localRotation = Quaternion.Euler(-89.98f, 0, 0);
                 trailsLeft.GetComponent<AssignParticleListener>().InitializeData();
                 trailsRight.GetComponent<AssignParticleListener>().InitializeData();
-            }            
+            }
         }
         private void Update()
         {
@@ -80,7 +79,7 @@ namespace MyMultiplayerProject
         }
         #endregion
         #region Coroutines
-        private IEnumerator WaitToRegainControll() 
+        private IEnumerator WaitToRegainControll()
         {
             yield return new WaitForSeconds(GameManager.PLAYER_RESPAWN_TIME);
 
@@ -90,14 +89,14 @@ namespace MyMultiplayerProject
         #region PunCallbacks
 
         [RPC]
-        public void UpdateNamesForAll(PhotonMessageInfo info) 
+        public void UpdateNamesForAll(PhotonMessageInfo info)
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            for (int i = 0; i < players.Length; i++) 
+            for (int i = 0; i < players.Length; i++)
             {
-                for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++) 
+                for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++)
                 {
-                    if (players[i].GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.PlayerList[j].ActorNumber) 
+                    if (players[i].GetComponent<PhotonView>().Owner.ActorNumber == PhotonNetwork.PlayerList[j].ActorNumber)
                     {
                         players[i].transform.Find("PlayerCanvas").GetChild(0).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.PlayerList[j].NickName;
                     }
@@ -108,7 +107,7 @@ namespace MyMultiplayerProject
         }
 
         [RPC]
-        public void ApplyDamage() 
+        public void ApplyDamage()
         {
 
             collider.enabled = false;
@@ -122,7 +121,7 @@ namespace MyMultiplayerProject
             }
 
 
-            if (photonView.IsMine) 
+            if (photonView.IsMine)
             {
                 object lives;
                 if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameManager.PLAYER_LIVES, out lives))
@@ -142,11 +141,11 @@ namespace MyMultiplayerProject
         }
 
         [RPC]
-        public void UseItem(Vector3 position, Quaternion rotation, PhotonMessageInfo info) 
+        public void UseItem(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
         {
             object item;
             info.Sender.CustomProperties.TryGetValue(GameManager.PLAYER_CURRENT_ITEM, out item);
-            
+
             if ((int)item > -1)
             {
                 float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
@@ -154,10 +153,10 @@ namespace MyMultiplayerProject
 
                 itemObj = Instantiate(manager.ItemPrefabs[(int)item], position, Quaternion.identity) as GameObject;
                 IItemBehaviour currentItemBehaviour = itemObj.GetComponent<IItemBehaviour>();
-                currentItemBehaviour.InitializeItem(photonView.Owner,currentItemBehaviour.GetOffset(), (rotation * Vector3.forward), Mathf.Abs(lag));
+                currentItemBehaviour.InitializeItem(photonView.Owner, currentItemBehaviour.GetOffset(), (rotation * Vector3.forward), Mathf.Abs(lag), info);
                 info.Sender.SetCustomProperties(new Hashtable { { GameManager.PLAYER_CURRENT_ITEM, -1 } });
             }
-            else 
+            else
             {
                 Debug.LogError("No Item");
             }
@@ -182,7 +181,7 @@ namespace MyMultiplayerProject
         //Camera behaviour Not Needed
         private void CheckExitScreen()
         {
-           
+
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +19,23 @@ namespace MyMultiplayerProject
         public GameObject[] ItemPrefabs;
         public Transform[] playerSpawnPoints;
         public Transform[] itemSpawnPoints;
+        private List<GameObject> players = new List<GameObject>();
 
+        public GameObject GetPlayer(int index) 
+        {
+            return players[index];
+        }
         #region Unity
         public void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else 
+            {
+                Destroy(this.gameObject);
+            }
         }
         public override void OnEnable()
         {
@@ -54,16 +66,20 @@ namespace MyMultiplayerProject
         #endregion
 
         #region Coroutines
-        private IEnumerator RespawnMysteryItem(Transform itemTaken) 
+        public IEnumerator RespawnMysteryItem(Transform itemTaken) 
         {
-            float timer = 0f;
-            while (timer <= GameManager.MYSTERY_ITEMS_SPAWN_TIME) 
-            {
-                yield return null;
-                Vector3 position = itemTaken.position;
-                object[] instatiationData = { position };
-                PhotonNetwork.InstantiateSceneObject("MysteryBox",position,Quaternion.identity,0,instatiationData);
-            }
+            //if (PhotonNetwork.IsMasterClient)
+            //{
+                float timer = 0f;
+                while (timer <= GameManager.MYSTERY_ITEMS_SPAWN_TIME)
+                {
+                    timer += Time.deltaTime;
+                    //               Debug.Log(timer);
+                    yield return null;
+                }
+                itemTaken.GetComponent<MeshRenderer>().enabled = true;
+                itemTaken.GetComponent<Collider>().enabled = true;
+            //}
         }
         private IEnumerator EndOfGame(string winner, int remainingLives) 
         {
@@ -94,6 +110,7 @@ namespace MyMultiplayerProject
         }
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
+
             CheckEndOfGame();
         }
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -108,7 +125,6 @@ namespace MyMultiplayerProject
             {
                 return;
             }
-
             if (changedProps.ContainsKey(GameManager.PLAYER_LOADED_LEVEL)) 
             {
                 if (CheckAllPlayerLoadedLevel()) 
@@ -132,6 +148,7 @@ namespace MyMultiplayerProject
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
             GameObject go =  PhotonNetwork.Instantiate("Kart Variant", playerSpawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].position, playerSpawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].rotation, 0);
+            players.Add(go);
             if (PhotonNetwork.LocalPlayer.IsLocal)
             {
                 CinemachineVirtualCamera camera = go.transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
@@ -148,12 +165,16 @@ namespace MyMultiplayerProject
         }
         private bool CheckAllPlayerLoadedLevel() 
         {
-            foreach (Player p in PhotonNetwork.PlayerList) 
+            if (!PhotonNetwork.IsConnected)
+            {
+                return true;
+            }
+            foreach (Player p in PhotonNetwork.PlayerList)
             {
                 object playerLoadedLevel;
-                if (p.CustomProperties.TryGetValue(GameManager.PLAYER_LOADED_LEVEL, out playerLoadedLevel)) 
+                if (p.CustomProperties.TryGetValue(GameManager.PLAYER_LOADED_LEVEL, out playerLoadedLevel))
                 {
-                    if ((bool)playerLoadedLevel) 
+                    if ((bool)playerLoadedLevel)
                     {
                         continue;
                     }

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class DestroyExplosionOBJ : MonoBehaviour
 {
 
@@ -9,7 +10,7 @@ public class DestroyExplosionOBJ : MonoBehaviour
     {
         if (!GetComponent<ParticleSystem>().isPlaying)
         {
-           Destroy(this.gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 }
