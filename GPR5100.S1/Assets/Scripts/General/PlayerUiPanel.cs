@@ -27,7 +27,7 @@ namespace MyMultiplayerProject
                 GameObject entry = Instantiate(playerEntryUiPrefab);
                 entry.transform.SetParent(gameObject.transform);
                 entry.transform.localPosition = Vector3.one;
-                entry.transform.localScale = Vector3.one;
+                entry.transform.localScale = new Vector3(0.5f,0.5f);
                 entry.transform.GetChild(0).GetComponent<Image>().sprite = GameManager.GetTexutre(p.GetPlayerNumber());
                 entry.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0}", p.GetScore());
 

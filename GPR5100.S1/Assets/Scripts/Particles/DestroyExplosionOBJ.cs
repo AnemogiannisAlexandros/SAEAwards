@@ -10,7 +10,10 @@ public class DestroyExplosionOBJ : MonoBehaviour
     {
         if (!GetComponent<ParticleSystem>().isPlaying)
         {
-            PhotonNetwork.Destroy(this.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }
         }
     }
 }

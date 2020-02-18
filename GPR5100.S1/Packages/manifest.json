@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.unity.cinemachine": "2.4.0",
+    "com.unity.collab-proxy": "1.2.15",
     "com.unity.learn.iet-framework": "0.2.1-preview.1",
     "com.unity.package-manager-ui": "2.0.8",
     "com.unity.postprocessing": "2.3.0",

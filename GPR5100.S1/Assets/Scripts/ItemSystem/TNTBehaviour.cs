@@ -39,7 +39,10 @@ public class TNTBehaviour : MonoBehaviour,IItemBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position, Quaternion.identity);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }

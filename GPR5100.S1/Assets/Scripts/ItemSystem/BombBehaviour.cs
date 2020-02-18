@@ -39,7 +39,10 @@ public class BombBehaviour : MonoBehaviour, IItemBehaviour
     {
         if (collision.gameObject.CompareTag("Player")||collision.gameObject.CompareTag("Wall"))
         {
-            PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position, Quaternion.identity);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Instantiate(explosion.name, collision.gameObject.transform.position, Quaternion.identity);
+            }
         }
     }
 }

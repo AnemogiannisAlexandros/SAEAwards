@@ -10,7 +10,7 @@ namespace MyMultiplayerProject
     public class InvisibilityBehaviour : MonoBehaviour, IItemBehaviour
     {
         [SerializeField]
-        private float invisTimer = 2;
+        private float invisTimer = 5;
         private List<Renderer> rends;
         public Player Owner { get; private set; }
 
@@ -33,6 +33,7 @@ namespace MyMultiplayerProject
             }
             StartCoroutine(InvisEnded());
         }
+
         public IEnumerator InvisEnded()
         {
             float curTimer = 0;
