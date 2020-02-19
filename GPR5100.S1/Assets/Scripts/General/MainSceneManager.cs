@@ -81,12 +81,27 @@ namespace MyMultiplayerProject
                 itemTaken.GetComponent<Collider>().enabled = true;
             //}
         }
-        private IEnumerator EndOfGame(string winner, int remainingLives) 
+        //New Implementation
+        private IEnumerator EndOfGame(string winner, int remainingLives)
+        {
+            float timer = 10.0f;
+            while (timer > 0.0f)
+            {
+                InfoText.text = string.Format("Player {0} wins with {1} remaining Lives.", winner, remainingLives);
+
+                yield return new WaitForEndOfFrame();
+
+                timer -= Time.deltaTime;
+            }
+            PhotonNetwork.LoadLevel(2);
+        }
+
+        private IEnumerator ResetToLobby()
         {
             float timer = 5.0f;
-            while (timer > 0.0f) 
+            while (timer > 0.0f)
             {
-                InfoText.text = string.Format("Player {0} won with {1} remaining Lives.\n\n\nReturning to login screen in {2} seconds.", winner, remainingLives, timer.ToString("n2"));
+                InfoText.text = string.Format("Returning to login screen in {0} seconds.", timer.ToString("n2"));
 
                 yield return new WaitForEndOfFrame();
 

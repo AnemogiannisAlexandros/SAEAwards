@@ -28,9 +28,10 @@ namespace MyMultiplayerProject
         {
              return Resources.Load<Sprite>("Textures/Player0" + (textureChoice+1) + "_Icon");
         }
-        public static Sprite GetItemTexture(int itemTexture)
+        public static Sprite GetItemTexture()
         {
-            return Resources.Load<Sprite>("Textures/Items/Item0" + (itemTexture + 1) + "_Icon");
+
+            return Resources.Load<Sprite>("Textures/Items/Item0" + PLAYER_ITEM + "_Icon");
 
         }
 

@@ -12,6 +12,7 @@ namespace KartGame.KartSystems
     /// </summary>
     public class KeyboardInput : MonoBehaviour, IInput
     {
+        private bool isPaused = false;
         [SerializeField]
         private KeyCode forwardButton,leftButton,rightButton,backwardButton,hopButton,boostButton,fireButton,itemButton;
         private PhotonView photonView;
@@ -53,6 +54,7 @@ namespace KartGame.KartSystems
         {
             photonView = GetComponent<PhotonView>();
             manager = GetComponent<KartManager>();
+            isPaused = false;
         }
         void Update ()
         {
@@ -76,6 +78,7 @@ namespace KartGame.KartSystems
         }
         void UserInput() 
         {
+           
             if (manager.IsControllable())
             {
                 if (Input.GetKey(forwardButton))
