@@ -22,7 +22,6 @@ public class PlasmaShieldBehaviour : MonoBehaviour, IItemBehaviour
     }
     public void Awake()
     {
-        offset = 4;
         photonView = GetComponent<PhotonView>();
     }
     public void InitializeItem(Player player, float offset, Vector3 originalDirection, float lag, PhotonMessageInfo info)
@@ -54,11 +53,13 @@ public class PlasmaShieldBehaviour : MonoBehaviour, IItemBehaviour
             {
                 PhotonNetwork.Instantiate(explosion.name, other.gameObject.transform.position, Quaternion.identity);
             }
+
             if (photonView.IsMine)
             {
                 other.gameObject.GetComponent<PhotonView>().RPC("ApplyDamage", RpcTarget.All);
-                DestroyItemLocaly();
             }
+
+            DestroyItemLocaly();
         }
     }
     private void DestroyItemLocaly()

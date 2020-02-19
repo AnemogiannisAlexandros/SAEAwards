@@ -48,6 +48,7 @@ namespace MyMultiplayerProject
             if (playerListEntries.TryGetValue(targetPlayer.ActorNumber, out entry)) 
             {
                 entry.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0}", targetPlayer.GetScore());
+                entry.transform.GetChild(2).GetComponent<Image>().sprite = GameManager.GetItemTexture(targetPlayer.GetPlayerNumber());
             }
         }
         #endregion

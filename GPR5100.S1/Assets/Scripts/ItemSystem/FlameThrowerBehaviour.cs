@@ -61,7 +61,6 @@ namespace MyMultiplayerProject
         private void OnTriggerStay(Collider other)
         {
             Debug.Log("OnTriggerStayRunning");
-            Debug.Log(curTimer);
             if (takeDamage && curTimer > 0.2f)
             {
                 if (other.GetComponent<PhotonView>() != null)

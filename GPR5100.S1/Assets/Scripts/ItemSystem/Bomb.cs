@@ -32,8 +32,8 @@ public class Bomb : MonoBehaviour
             if (photonView.IsMine) 
             {
                 collision.gameObject.GetComponent<PhotonView>().RPC("ApplyDamage", RpcTarget.All);
-                DestroyItemLocaly();
             }
+            DestroyItemLocaly();
         }
     }
 

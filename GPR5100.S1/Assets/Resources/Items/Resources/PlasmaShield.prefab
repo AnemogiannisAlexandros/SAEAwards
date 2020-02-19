@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9023100933013800891}
   - component: {fileID: 114872167325953946}
   - component: {fileID: 114017086042766506}
+  - component: {fileID: 114948944774154938}
   m_Layer: 0
   m_Name: PlasmaShield
   m_TagString: Untagged
@@ -147,6 +148,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114017086042766506}
+  - {fileID: 114948944774154938}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -165,3 +167,21 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &114948944774154938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909614760149706688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
