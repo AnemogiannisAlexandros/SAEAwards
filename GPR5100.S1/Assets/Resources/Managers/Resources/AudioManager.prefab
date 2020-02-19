@@ -141,11 +141,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 696332d1bf819ce46a3ceee3d9a9b468, type: 3}
-  - {fileID: 8300000, guid: c49a8c31a69f73148b00c88c87f13ec0, type: 3}
-  - {fileID: 8300000, guid: a089b7f7ce924854e92b79ccd8a0ad1c, type: 3}
-  - {fileID: 8300000, guid: f18febbfe0de64a4fb6834e634c0b442, type: 3}
-  - {fileID: 8300000, guid: 7a3e358d3fd6dc24ca0161bf27fbd7cf, type: 3}
+  - {fileID: 8300000, guid: e628a487e67e611418d0f88fa782fd7f, type: 3}
+  - {fileID: 8300000, guid: af33fe8b5bdf746469e1aa3f1e863953, type: 3}
+  - {fileID: 8300000, guid: 8e7b984fbdeaff54799d5b0fb3d20b89, type: 3}
+  - {fileID: 8300000, guid: f2f0b63b8cbaa4044a1ca3da28a6bfc5, type: 3}
+  - {fileID: 8300000, guid: 2e80e0283b2238143b44a371f1ec6f79, type: 3}
+  - {fileID: 8300000, guid: 2aa11df06d2f1c2408742c55ccc1e7aa, type: 3}
+  - {fileID: 8300000, guid: 035dc6b95ddf69b45b9bf800b4583c44, type: 3}
 --- !u!1 &6512375338661420749
 GameObject:
   m_ObjectHideFlags: 0

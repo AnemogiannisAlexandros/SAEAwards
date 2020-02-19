@@ -11,6 +11,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerListEntry Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 11446740, guid: d68bf8413681d9b4aa7328277e632e3f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 30b335b777534e748b7d195d113d9944,
+        type: 3}
+    - target: {fileID: 11470916, guid: d68bf8413681d9b4aa7328277e632e3f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 30b335b777534e748b7d195d113d9944,
+        type: 3}
     - target: {fileID: 22423522, guid: d68bf8413681d9b4aa7328277e632e3f, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0

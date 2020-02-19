@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.Collections;
+
 
 namespace MyMultiplayerProject
 {
@@ -124,7 +126,7 @@ namespace MyMultiplayerProject
 
             StartGameButton.gameObject.SetActive(CheckPlayersReady());
 
-            Hashtable props = new Hashtable
+            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
             {
                 {GameManager.PLAYER_LOADED_LEVEL, false}
             };
@@ -172,7 +174,7 @@ namespace MyMultiplayerProject
             }
         }
 
-        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
         {
             if (playerListEntries == null)
             {
@@ -261,11 +263,20 @@ namespace MyMultiplayerProject
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
-
+            StartCoroutine(MusicFadeOut());
             PhotonNetwork.LoadLevel(1);
         }
 
         #endregion
+        private IEnumerator MusicFadeOut() 
+        {
+            AudioSource src = FindObjectOfType<AudioSource>();
+            while (src.volume > 0) 
+            {
+                src.volume -= 0.05f;
+                yield return null;
+            }
+        }
 
         private bool CheckPlayersReady()
         {
