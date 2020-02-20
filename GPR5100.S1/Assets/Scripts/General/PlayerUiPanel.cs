@@ -13,7 +13,7 @@ namespace MyMultiplayerProject
     public class PlayerUiPanel : MonoBehaviourPunCallbacks
     {
         public GameObject playerEntryUiPrefab;
-
+        public Sprite defaultSpriteMask;
         private Dictionary<int, GameObject> playerListEntries;
 
 
@@ -30,7 +30,7 @@ namespace MyMultiplayerProject
                 entry.transform.localScale = new Vector3(0.5f,0.5f);
                 entry.transform.GetChild(0).GetComponent<Image>().sprite = GameManager.GetTexutre(p.GetPlayerNumber());
                 entry.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0}", p.GetScore());
-
+                entry.transform.GetChild(2).GetComponent<Image>().sprite = defaultSpriteMask;
                 playerListEntries.Add(p.ActorNumber, entry);
             }
         }
@@ -49,7 +49,18 @@ namespace MyMultiplayerProject
             {
                 entry.transform.GetChild(0).GetComponent<Image>().sprite = GameManager.GetTexutre(targetPlayer.GetPlayerNumber());
                 entry.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0}", targetPlayer.GetScore());
-                entry.transform.GetChild(2).GetComponent<Image>().sprite = GameManager.GetItemTexture();
+                object item;
+                if (targetPlayer.CustomProperties.TryGetValue(GameManager.PLAYER_CURRENT_ITEM, out item))
+                {
+                    if ((int)item >= 0)
+                    {
+                        entry.transform.GetChild(2).GetComponent<Image>().sprite = GameManager.GetItemTexture((int)item);
+                    }
+                    else 
+                    {
+                        entry.transform.GetChild(2).GetComponent<Image>().sprite = defaultSpriteMask;
+                    }
+                }
             }
         }
         #endregion

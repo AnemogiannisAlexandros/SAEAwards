@@ -112,6 +112,8 @@ namespace MyMultiplayerProject
             {
                 GameObject entry = Instantiate(PlayerListEntryPrefab);
                 entry.transform.SetParent(InsideRoomPanel.transform);
+                entry.transform.localPosition = new Vector3(0, 0, 0);
+                entry.transform.localRotation = Quaternion.Euler(0.056f, 0, 0);
                 entry.transform.localScale = Vector3.one;
                 entry.GetComponent<PlayerEntryList>().Initialize(p.ActorNumber, p.NickName);
 
@@ -150,6 +152,8 @@ namespace MyMultiplayerProject
         {
             GameObject entry = Instantiate(PlayerListEntryPrefab);
             entry.transform.SetParent(InsideRoomPanel.transform);
+            entry.transform.localPosition = new Vector3(0, 0, 0);
+            entry.transform.localRotation = Quaternion.Euler(0.056f, 0, 0);
             entry.transform.localScale = Vector3.one;
             entry.GetComponent<PlayerEntryList>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
 

@@ -46,9 +46,10 @@ namespace KartGame.KartSystems
         float m_Damper = 1f;
         float m_Volume = 1;
 
-        void Awake()
+        public void Init(IKartInfo info)
         {
-            m_KartInfo = kartInfo as IKartInfo;
+            enabled = true;
+            m_KartInfo = info;
             m_RandomBuffer = new float[97];
             for (var i = 0; i < m_RandomBuffer.Length; i++)
                 m_RandomBuffer[i] = Random.Range(-1, 1);
@@ -61,7 +62,6 @@ namespace KartGame.KartSystems
             m_Time = 0;
             m_SecondsPerSample = 1f / AudioSettings.outputSampleRate;
         }
-
         void Update()
         {
             RPM = m_KartInfo.LocalSpeed / m_KartInfo.CurrentStats.topSpeed;

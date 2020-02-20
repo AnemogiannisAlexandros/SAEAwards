@@ -36,6 +36,7 @@ public class PlasmaShieldBehaviour : MonoBehaviour, IItemBehaviour
     {
         if (isDestroyed)
         {
+            Destroy(gameObject);
             return;
         }
         if (other.gameObject.CompareTag("Shootable"))
@@ -53,12 +54,10 @@ public class PlasmaShieldBehaviour : MonoBehaviour, IItemBehaviour
             {
                 PhotonNetwork.Instantiate(explosion.name, other.gameObject.transform.position, Quaternion.identity);
             }
-
             if (photonView.IsMine)
             {
                 other.gameObject.GetComponent<PhotonView>().RPC("ApplyDamage", RpcTarget.All);
             }
-
             DestroyItemLocaly();
         }
     }

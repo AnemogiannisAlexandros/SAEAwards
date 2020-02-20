@@ -8,6 +8,7 @@ using RPC = Photon.Pun.RPC;
 using System.Collections.Generic;
 using Photon.Realtime;
 using TMPro;
+using KartGame.KartSystems;
 
 namespace MyMultiplayerProject
 {
@@ -49,23 +50,11 @@ namespace MyMultiplayerProject
             }
             PhotonNetwork.LocalPlayer.SetScore(9);
             photonView.RPC("UpdateNamesForAll", RpcTarget.AllViaServer);
+            
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
             {
                 childRenderers.Add(r);
                 r.material.color = GameManager.GetColor(photonView.Owner.GetPlayerNumber());
-            }
-            if (photonView.IsMine)
-            {
-                GameObject trailsLeft = PhotonNetwork.Instantiate("DriftTrail", transform.position, Quaternion.identity);
-                GameObject trailsRight = PhotonNetwork.Instantiate("DriftTrail", transform.position, Quaternion.identity);
-                trailsLeft.transform.SetParent(transform);
-                trailsRight.transform.SetParent(transform);
-                trailsLeft.transform.localPosition = new Vector3(-0.4160004f, -0.49844f, -0.7085f);
-                trailsRight.transform.localPosition = new Vector3(0.3809996f, -0.49844f, -0.7085f);
-                trailsRight.transform.localRotation = Quaternion.Euler(-89.98f, 0, 0);
-                trailsLeft.transform.localRotation = Quaternion.Euler(-89.98f, 0, 0);
-                trailsLeft.GetComponent<AssignParticleListener>().InitializeData();
-                trailsRight.GetComponent<AssignParticleListener>().InitializeData();
             }
         }
         private void Update()
@@ -115,10 +104,10 @@ namespace MyMultiplayerProject
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
             anim.SetTrigger("Hit");
-            foreach (Renderer r in childRenderers)
-            {
-                r.enabled = true;
-            }
+            //foreach (Renderer r in childRenderers)
+            //{
+            //    r.enabled = true;
+            //}
 
 
             if (photonView.IsMine)

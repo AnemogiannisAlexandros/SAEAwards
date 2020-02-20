@@ -31,8 +31,10 @@ namespace MyMultiplayerProject
                 return;
             }
             itemId = Random.Range(0, manager.ItemPrefabs.Length);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { GameManager.PLAYER_CURRENT_ITEM, itemId } });
+            other.GetComponent<PhotonView>().Owner.SetCustomProperties(new Hashtable { { GameManager.PLAYER_CURRENT_ITEM, itemId } });
+            //PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable { { GameManager.PLAYER_CURRENT_ITEM, itemId } });
             transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+            transform.GetChild(1).GetComponent<AudioSource>().Play();
             col.enabled = false;
             rend.enabled = false;
             MainSceneManager.Instance.StartCoroutine(MainSceneManager.Instance.RespawnMysteryItem(this.transform));

@@ -110,7 +110,7 @@ namespace KartGame.KartSystems
         public Wheel rearRightWheel;
 
         IInput m_Input;
-        IKartInfo m_KartMovement;
+        public IKartInfo m_KartMovement;
         Quaternion m_DefaultSteeringWheelLocalRotation;
         Vector3 m_NormalizedSteeringWheelRotationAxis;
         float m_InverseFrontWheelRadius;

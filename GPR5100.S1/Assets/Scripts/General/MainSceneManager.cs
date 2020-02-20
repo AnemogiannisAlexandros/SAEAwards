@@ -9,6 +9,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using Cinemachine;
 using TMPro;
+using KartGame.KartSystems;
 
 namespace MyMultiplayerProject
 {
@@ -168,7 +169,28 @@ namespace MyMultiplayerProject
             {
                 CinemachineVirtualCamera camera = go.transform.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
                 camera.gameObject.SetActive(true);
-               // go.transform.Find("Player Canvas").GetChild(0).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.LocalPlayer.NickName;
+                KartMovement movement = go.GetComponent<KartMovement>();
+                GameObject trailsLeft = PhotonNetwork.Instantiate("DriftTrailVar", transform.position, Quaternion.identity);
+                GameObject trailsRight = PhotonNetwork.Instantiate("DriftTrailVar", transform.position, Quaternion.identity);
+                trailsLeft.transform.SetParent(go.transform);
+                trailsRight.transform.SetParent(go.transform);
+                trailsLeft.transform.localPosition = new Vector3(-0.4160004f, -0.49844f, -0.7085f);
+                trailsRight.transform.localPosition = new Vector3(0.3809996f, -0.49844f, -0.7085f);
+                trailsRight.transform.localRotation = Quaternion.Euler(-89.98f, 0, 0);
+                trailsLeft.transform.localRotation = Quaternion.Euler(-89.98f, 0, 0);
+                movement.OnDriftStarted.AddListener(trailsRight.GetComponent<ParticleSystem>().Play);
+                movement.OnDriftStarted.AddListener(trailsLeft.GetComponent<ParticleSystem>().Play);
+                movement.OnDriftStopped.AddListener(trailsRight.GetComponent<ParticleSystem>().Stop);
+                movement.OnDriftStopped.AddListener(trailsLeft.GetComponent<ParticleSystem>().Stop);
+
+                GameObject playerAudio = PhotonNetwork.Instantiate("KartAudio", transform.position, Quaternion.identity);
+                playerAudio.transform.SetParent(go.transform);
+                playerAudio.transform.localPosition = new Vector3(0, 0, 0);
+                playerAudio.transform.GetChild(2).GetComponent<EngineAudio>().Init(movement);
+                movement.OnDriftStarted.AddListener(playerAudio.transform.GetChild(1).GetComponent<AudioSource>().Play);
+                movement.OnDriftStopped.AddListener(playerAudio.transform.GetChild(1).GetComponent<AudioSource>().Stop);
+                movement.OnKartCollision.AddListener(playerAudio.transform.GetChild(0).GetComponent<AudioSource>().Play);
+                // go.transform.Find("Player Canvas").GetChild(0).GetComponent<TextMeshProUGUI>().text = PhotonNetwork.LocalPlayer.NickName;
             }
             if (PhotonNetwork.IsMasterClient) 
             {
@@ -240,7 +262,9 @@ namespace MyMultiplayerProject
                         remainingLives = p.GetScore();
                     }
                 }
-                StartCoroutine(EndOfGame(winner, remainingLives));
+               // StartCoroutine(EndOfGame(winner, remainingLives));
+                StartCoroutine(ResetToLobby());
+
             }
         }
         public void Disconnect() 
