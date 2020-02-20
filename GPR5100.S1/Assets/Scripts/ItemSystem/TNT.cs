@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
-using Photon.Pun.UtilityScripts;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class TNT : MonoBehaviour

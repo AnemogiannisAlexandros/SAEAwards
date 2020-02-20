@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-
-using Random = UnityEngine.Random;
-using Photon.Pun.UtilityScripts;
 using Photon.Pun;
-
+/// <summary>
+/// Bomb Attributes
+/// </summary>
 public class Bomb : MonoBehaviour
 {
 

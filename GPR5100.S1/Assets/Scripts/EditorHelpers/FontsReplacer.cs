@@ -4,6 +4,11 @@
 //using UnityEditor;
 //using UnityEngine.UI;
 
+
+///
+/// Replace fonts on all children with chosen font
+///
+
 //public class FontsReplacer : MonoBehaviour
 //{
 //}

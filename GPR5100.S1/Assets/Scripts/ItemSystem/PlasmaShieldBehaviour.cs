@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Photon.Realtime;
+﻿using Photon.Realtime;
 using UnityEngine;
 using Photon.Pun;
+
+/// <summary>
+/// PlasmaShield Behaviour and Initialization Data
+/// </summary>
 
 public class PlasmaShieldBehaviour : MonoBehaviour, IItemBehaviour
 { 

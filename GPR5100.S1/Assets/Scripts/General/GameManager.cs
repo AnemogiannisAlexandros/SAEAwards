@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
+/// <summary>
+/// 
+/// Holds All the Mandatory Data that each player has for the game
+/// 
+/// </summary>
 namespace MyMultiplayerProject
 {
     
@@ -27,11 +32,11 @@ namespace MyMultiplayerProject
 
         public static Sprite GetTexutre(int textureChoice) 
         {
-             return Resources.Load<Sprite>("Textures/Player/Player0" + (textureChoice+1) + "_Icon");
+             return Resources.Load<Sprite>("Textures/Player/Player0" + (textureChoice + 1) + "_Icon");
         }
         public static Sprite GetItemTexture(int itemNumber)
         {
-            return Resources.Load<Sprite>("Textures/Items/Item0" + itemNumber + "_Icon");
+            return Resources.Load<Sprite>("Textures/Items/Item0" + (itemNumber + 1) + "_Icon");
         }
 
         public static Color32 GetColor(int colorChoice)

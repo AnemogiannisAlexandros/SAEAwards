@@ -8,7 +8,6 @@ using Photon.Pun.UtilityScripts;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using Cinemachine;
-using TMPro;
 using KartGame.KartSystems;
 
 namespace MyMultiplayerProject
@@ -27,6 +26,7 @@ namespace MyMultiplayerProject
             return players[index];
         }
         #region Unity
+        //Singleton Patern
         public void Awake()
         {
             if (Instance == null)
@@ -38,6 +38,7 @@ namespace MyMultiplayerProject
                 Destroy(this.gameObject);
             }
         }
+        //Assign Delegate & spawn Scene Audio
         public override void OnEnable()
         {
             base.OnEnable();
@@ -48,6 +49,7 @@ namespace MyMultiplayerProject
 
             }
         }
+        //Wait for everyone to Load the scene
         public void Start()
         {
             InfoText.text = "Waiting for other players...";
@@ -58,6 +60,7 @@ namespace MyMultiplayerProject
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
         }
+        //Detach Delegate
         public override void OnDisable()
         {
             base.OnDisable();
@@ -67,6 +70,7 @@ namespace MyMultiplayerProject
         #endregion
 
         #region Coroutines
+        //Respawn Mystery Item Givers After Pick Up
         public IEnumerator RespawnMysteryItem(Transform itemTaken) 
         {
             //if (PhotonNetwork.IsMasterClient)
@@ -83,6 +87,7 @@ namespace MyMultiplayerProject
             //}
         }
         //New Implementation
+        //Not Called as Last Level is Not Yet Finished
         private IEnumerator EndOfGame(string winner, int remainingLives)
         {
             float timer = 10.0f;
@@ -97,6 +102,7 @@ namespace MyMultiplayerProject
             PhotonNetwork.LoadLevel(2);
         }
 
+        //Returns the User at the Lobby After he won
         private IEnumerator ResetToLobby()
         {
             float timer = 5.0f;
@@ -129,6 +135,7 @@ namespace MyMultiplayerProject
 
             CheckEndOfGame();
         }
+        //Major Checks when Player Attributes Have Changed on the Game Manager
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
             if (changedProps.ContainsKey(GameManager.PLAYER_LIVES)) 
@@ -155,6 +162,7 @@ namespace MyMultiplayerProject
         }
         #endregion
 
+        //Assing and Instantiate Objects According to needs
         private void StartGame() 
         {
             Hashtable props = new Hashtable
@@ -200,6 +208,7 @@ namespace MyMultiplayerProject
                 }
             } 
         }
+        //reutrns True when all players are in the scene
         private bool CheckAllPlayerLoadedLevel() 
         {
             if (!PhotonNetwork.IsConnected)
@@ -220,6 +229,8 @@ namespace MyMultiplayerProject
             }
             return true;
         }
+        //returns when the players have died
+        //and returns all users at the lobby after some time
         private void CheckEndOfGame() 
         {
             foreach (Player p in PhotonNetwork.PlayerList) 

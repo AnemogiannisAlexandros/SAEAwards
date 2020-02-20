@@ -3,6 +3,10 @@
 //using UnityEngine;
 //using UnityEditor;
 
+///
+/// Change settings on all child renderers
+///
+
 //public class EnableTowSidedShadow : MonoBehaviour
 //{
 //}

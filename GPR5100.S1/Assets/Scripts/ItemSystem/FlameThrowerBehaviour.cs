@@ -1,9 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Photon.Realtime;
 using UnityEngine;
 using Photon.Pun;
-
+/// <summary>
+/// FlameThrower Behaviour and Initialization Data
+/// </summary>
 namespace MyMultiplayerProject
 {
 

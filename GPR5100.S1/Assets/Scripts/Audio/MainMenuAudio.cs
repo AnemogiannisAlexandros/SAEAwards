@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Holds data for the Lobby Button Audio Clips
+/// Buttons Call these methods on Hover and Click Events to play audio
+/// </summary>
 public class MainMenuAudio : MonoBehaviour
 {
     AudioSource src;

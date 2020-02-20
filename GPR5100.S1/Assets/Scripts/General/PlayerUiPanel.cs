@@ -8,6 +8,10 @@ using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using Photon.Pun;
 
+/// <summary>
+/// Main Scene UI Manager
+/// Updates Graphics on the Canvas According to player Stats(Health,Icon)
+/// </summary>
 namespace MyMultiplayerProject
 {
     public class PlayerUiPanel : MonoBehaviourPunCallbacks

@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Photon.Realtime;
+﻿using Photon.Realtime;
 using UnityEngine;
 using Photon.Pun;
 
+/// <summary>
+/// Bomb Behaviour and Initialization Data
+/// </summary>
 public class BombBehaviour : MonoBehaviour, IItemBehaviour
 {
     [SerializeField]

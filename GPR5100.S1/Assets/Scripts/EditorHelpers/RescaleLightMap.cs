@@ -3,6 +3,10 @@
 //using UnityEngine;
 //using UnityEditor;
 
+///
+/// LightMap Size Rescale On All Children Objects
+///
+
 //public class RescaleLightMap : MonoBehaviour
 //{
 //}

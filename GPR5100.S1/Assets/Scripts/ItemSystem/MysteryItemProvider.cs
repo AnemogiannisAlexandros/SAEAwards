@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
+/// <summary>
+/// Provides the colliding player with an appropriate item from the Game Manager Item Pool
+/// </summary>
 namespace MyMultiplayerProject
 {
     public class MysteryItemProvider : MonoBehaviour

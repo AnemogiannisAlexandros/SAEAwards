@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using KartGame.KartSystems;
-using MyMultiplayerProject;
 
+
+
+/// <summary>
+/// Assigns the Instantiated Object's Particle System to the Movement OnDrift Events
+/// </summary>
 public class AssignParticleListener : MonoBehaviour
 {
     KartMovement movement;

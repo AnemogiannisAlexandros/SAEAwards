@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Photon.Realtime;
 using UnityEngine;
 using Photon.Pun;
-
+/// <summary>
+/// Invisibility Behaviour and Initialization Data
+/// </summary>
 namespace MyMultiplayerProject
 {
 

@@ -6,14 +6,12 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Pun;
 using RPC = Photon.Pun.RPC;
 using System.Collections.Generic;
-using Photon.Realtime;
 using TMPro;
-using KartGame.KartSystems;
 
 namespace MyMultiplayerProject
 {
     /// <summary>
-    /// To Do Implementation of Kart
+    /// All Implementation and RPCs of the carts
     /// </summary>
     public class KartManager : MonoBehaviour
     {
@@ -25,6 +23,7 @@ namespace MyMultiplayerProject
         private new Collider collider;
         private new List<Renderer> childRenderers = new List<Renderer>();
         private Animator anim;
+        //Allow Input Controll of this Object
         private bool controllable = true;
 
         public bool IsControllable()
@@ -43,6 +42,7 @@ namespace MyMultiplayerProject
 
         public void Start()
         {
+            //Setup starting data
             object item;
             if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameManager.PLAYER_CURRENT_ITEM, out item))
             {
@@ -57,17 +57,20 @@ namespace MyMultiplayerProject
                 r.material.color = GameManager.GetColor(photonView.Owner.GetPlayerNumber());
             }
         }
-        private void Update()
-        {
-            //Debug.Log(PhotonNetwork.LocalPlayer.GetScore());
-            object item;
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameManager.PLAYER_CURRENT_ITEM, out item))
-            {
-                Debug.Log((int)item);
-            }
-        }
+
+        //private void Update()
+        //{
+        //    //Debug.Log(PhotonNetwork.LocalPlayer.GetScore());
+        //    object item;
+        //    if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(GameManager.PLAYER_CURRENT_ITEM, out item))
+        //    {
+        //        Debug.Log((int)item);
+        //    }
+        //}
         #endregion
         #region Coroutines
+            //Wait some time after you got hit
+            //Call the appropriate RPC when the time ends
         private IEnumerator WaitToRegainControll()
         {
             yield return new WaitForSeconds(GameManager.PLAYER_RESPAWN_TIME);
@@ -77,6 +80,7 @@ namespace MyMultiplayerProject
         #endregion
         #region PunCallbacks
 
+        //Update Names on All Clients 
         [RPC]
         public void UpdateNamesForAll(PhotonMessageInfo info)
         {
@@ -95,6 +99,7 @@ namespace MyMultiplayerProject
 
         }
 
+        //Deal Damage to the player that got hit
         [RPC]
         public void ApplyDamage()
         {
@@ -129,6 +134,7 @@ namespace MyMultiplayerProject
             }
         }
 
+        //Use Item of the player that sent the RPC with appropriate values
         [RPC]
         public void UseItem(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
         {
@@ -152,6 +158,7 @@ namespace MyMultiplayerProject
 
         }
 
+        //Enable colliders and renderers after the respawn timer has ended
         [RPC]
         public void RegainControll()
         {
@@ -167,10 +174,5 @@ namespace MyMultiplayerProject
             //Destruction.Stop();
         }
         #endregion
-        //Camera behaviour Not Needed
-        private void CheckExitScreen()
-        {
-
-        }
     }
 }
